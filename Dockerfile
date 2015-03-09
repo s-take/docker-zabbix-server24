@@ -17,7 +17,7 @@ RUN yum install -y zabbix-agent zabbix-get zabbix-java-gateway zabbix-sender zab
 
 # setup supervisor
 RUN yum install -y python-setuptools
-RUN yum install -y http://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensuse/repositories/home:/presbrey:/py/EL6/noarch/supervisor-3.0-13.1.noarch.rpm
+RUN easy_install supervisor
 
 # Cleaining up.
 RUN yum clean all
