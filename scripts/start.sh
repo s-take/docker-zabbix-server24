@@ -23,7 +23,8 @@ if [ ! -f /mysql-configured ]; then
 
          mysql -uroot -p"$MYSQL_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS zabbix CHARACTER SET utf8;"
 
-         zabbix_mysql_v="/usr/share/doc/zabbix-server-mysql-2.4.3/create"
+         zabbix_v=`zabbix_server -V | awk 'NR==1{ print substr($3,2) }'`
+         zabbix_mysql_v="/usr/share/doc/zabbix-server-mysql-${zabbix_v}/create"
 
          mysql -uroot -D zabbix -p"$MYSQL_PASSWORD" < "${zabbix_mysql_v}/schema.sql"
          mysql -uroot -D zabbix -p"$MYSQL_PASSWORD" < "${zabbix_mysql_v}/images.sql"
