@@ -42,4 +42,3 @@ fi
 passwd -d root
 
 /usr/bin/supervisord
-

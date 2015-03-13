@@ -40,18 +40,14 @@ RUN chmod 640 /etc/zabbix/zabbix_server.conf
 RUN chown root:zabbix /etc/zabbix/zabbix_server.conf
 RUN chmod 755 /usr/local/sbin/zabbix-server.sh /usr/local/sbin/zabbix-agentd.sh
 
-# https://github.com/dotcloud/docker/issues/1240#issuecomment-21807183
-RUN echo "NETWORKING=yes" > /etc/sysconfig/network
-
 # Add the script that will start the repo.
 ADD ./supervisord/supervisord.conf /etc/supervisord.conf
-ADD ./scripts/start.sh /usr/local/sbin/start.sh
-RUN chmod 755 /usr/local/sbin/start.sh
+ADD ./run.sh /run.sh
+RUN chmod 755 /run.sh
 
 # Expose the Ports used by
 # * Zabbix services
 # * Apache with Zabbix UI
 EXPOSE 10051 10052 80
 
-CMD ["/bin/bash", "/usr/local/sbin/start.sh"]
-
+CMD ["/bin/bash", "/run.sh"]
